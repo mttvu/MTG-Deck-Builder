@@ -42,12 +42,15 @@ class CardActivity : AppCompatActivity() {
         })
 
         deckViewModel = ViewModelProviders.of(this).get(DeckViewModel::class.java)
+        if (intent.hasExtra(DECK_EXTRA)){
+        deckViewModel.deck.value = intent.extras?.getParcelable("DECK_EXTRA")!!}
+
 
     }
 
     private fun initViews() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        if (intent.hasExtra(DECK_EXTRA) == null) {
+        if (deckViewModel.deck.value == null) {
             btnAddToDeck.visibility = View.GONE
         } else {
             btnAddToDeck.setOnClickListener { addToDeck() }
@@ -56,8 +59,7 @@ class CardActivity : AppCompatActivity() {
     }
 
     private fun addToDeck() {
-        if (intent.hasExtra("DECK_EXTRA")) {
-            deckViewModel.deck.value = intent.extras?.getParcelable("DECK_EXTRA")!!
+
             deckViewModel.addCard(viewModel.card.value as Card)
             deckViewModel.updateDeck()
             Toast.makeText(this, getString(R.string.card_added), Toast.LENGTH_SHORT).show()
@@ -65,7 +67,7 @@ class CardActivity : AppCompatActivity() {
             returnIntent.putExtra(SearchActivity.EXTRA_DECK, deckViewModel.deck.value)
             setResult(Activity.RESULT_OK, returnIntent)
             finish()
-        }
+
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

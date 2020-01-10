@@ -40,6 +40,8 @@ class SearchActivity : AppCompatActivity() {
             }
             cardAdapter.notifyDataSetChanged()
         })
+        if (intent.hasExtra(EXTRA_DECK)){
+        viewModel.deck.value = intent.extras?.getParcelable(EXTRA_DECK)!!}
 
     }
 
@@ -73,8 +75,7 @@ class SearchActivity : AppCompatActivity() {
 
     private fun onCardClick(card: Card) {
 
-        if (intent.hasExtra(EXTRA_DECK)) {
-            viewModel.deck.value = intent.extras?.getParcelable(EXTRA_DECK)!!
+        if (viewModel.deck.value != null) {
             val intent = Intent(this, CardActivity::class.java)
             intent.putExtra(CardActivity.DECK_EXTRA, viewModel.deck.value)
             intent.putExtra(CardActivity.CARD_EXTRA, card)

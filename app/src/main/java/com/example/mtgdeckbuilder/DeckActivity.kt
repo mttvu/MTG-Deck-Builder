@@ -40,7 +40,7 @@ class DeckActivity : AppCompatActivity() {
         fab.setOnClickListener {
             val intent = Intent(this, SearchActivity::class.java)
             intent.putExtra(SearchActivity.EXTRA_DECK, viewModel.deck.value)
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_2)
         }
     }
 

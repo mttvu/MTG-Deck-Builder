@@ -53,7 +53,7 @@ class CardsFragment : Fragment() {
     private fun onCardClick(card: Card){
         val intent = Intent((activity as AppCompatActivity), CardActivity::class.java)
         intent.putExtra(CardActivity.CARD_EXTRA, card)
-        startActivityForResult(intent, REQUEST_CODE_2)
+        startActivity(intent)
     }
 
 
