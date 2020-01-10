@@ -10,7 +10,7 @@ interface DeckDao {
     fun getAllDecks(): LiveData<List<Deck>>
 
     @Query("SELECT * FROM deckTable WHERE id=:id ")
-    fun getDeck(id: Long?): LiveData<Deck>
+    fun getDeck(id: Long?): Deck
 
     @Insert
     fun insertDeck(deck: Deck)

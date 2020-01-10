@@ -40,6 +40,13 @@ class CardsFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.deck.value != null){
+            viewModel.getDeck()
+        }
+    }
+
     private fun initViewModel() {
         viewModel = ViewModelProviders.of(activity as AppCompatActivity).get(DeckViewModel::class.java)
         viewModel.deck.value = (activity as AppCompatActivity).intent.getParcelableExtra(EXTRA_DECK)!!

@@ -16,7 +16,7 @@ class DeckRepository(context: Context) {
         return deckDao.getAllDecks()
     }
 
-    fun getDeck(id: Long?): LiveData<Deck>{
+    fun getDeck(id: Long?): Deck{
         return deckDao.getDeck(id)
     }
 

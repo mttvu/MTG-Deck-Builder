@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class DeckViewModel (application: Application): AndroidViewModel(application){
 
@@ -15,10 +16,20 @@ class DeckViewModel (application: Application): AndroidViewModel(application){
 
     val decks = deckRepository.getAllDecks()
 
-    val deck = MutableLiveData<Deck>()
+    var deck = MutableLiveData<Deck>()
 
     fun getGroupedCards(): Map<String, List<Card>> {
         return deck.value!!.cards!!.groupBy{it.types[0]}
+    }
+
+    fun getDeck(){
+
+        ioScope.launch {
+            var newDeck  = deckRepository.getDeck(deck.value?.id)
+            withContext(Dispatchers.Main) {
+                deck.value = newDeck
+            }
+        }
     }
 
     fun addCard(card: Card){
