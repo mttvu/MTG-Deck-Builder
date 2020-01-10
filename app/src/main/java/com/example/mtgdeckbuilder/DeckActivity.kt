@@ -55,9 +55,10 @@ class DeckActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intent: Intent?) {
         super.onActivityResult(requestCode, resultCode, intent)
+        if (requestCode == REQUEST_CODE_2){
         val fragment: Fragment? =
-            supportFragmentManager.findFragmentByTag("android:switcher:" + R.id.viewPager + ":0")
-        fragment?.onActivityResult(requestCode, resultCode, intent)
+            supportFragmentManager.fragments[0]
+        fragment?.onActivityResult(requestCode, resultCode, intent)}
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {

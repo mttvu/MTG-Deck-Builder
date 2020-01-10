@@ -60,7 +60,7 @@ class CardsFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE_2) {
             if (resultCode == Activity.RESULT_OK) {
-                viewModel.deck.value = (activity as AppCompatActivity).intent.getParcelableExtra(EXTRA_DECK)!!
+                 viewModel.deck.value = (activity as AppCompatActivity).intent.getParcelableExtra(EXTRA_DECK)!!
             }
         }
     }
